@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and Register</title>
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;background-color: green;
+      border-style: outset;cursor:pointer;
+
+    }
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      text-align: center;
+      padding-top: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      cursor:pointer;background-color: blue;
+      border-radius: 50px;
+
+    }
+    input[type="text"],
+    input[type="password"] {
+      padding: 8px;
+      font-size: 16px;
+      margin: 5px;
+    }
+    h1{text-align: center;}
+    logout
+  </style>
+</head>
+<body>
+<h1>WELCOME TO NTHUNGUNI SECONDARY SCHOOL<h1>
+<div class="container"><br>
+  <h1> </h1>
+    <button id="registerBtn">Register</button>
+  <button id="loginBtn">Login</button>
+</div>
+
+<div id="registerForm" style="display: none;">
+  <h2>Registration</h2>
+  <input type="text" id="phoneNumberInput" placeholder="Enter your phone number">
+  <input type="password" id="passwordInput" placeholder="Create a password">
+  <button id="submitRegistration">Register</button>
+</div>
+
+<div id="loginForm" style="display: none;">
+  <h2>Login</h2>
+  <input type="text" id="loginPhoneNumberInput" placeholder="Enter your phone number">
+  <input type="password" id="loginPasswordInput" placeholder="Enter your password">
+  <button id="submitLogin">Login</button>
+</div>
+
+<script>
+  var registeredUsers = {};
+
+  function registerUser(phoneNumber, password) {
+    registeredUsers[phoneNumber] = password;
+    alert("Registration successful! You can now login.");
+    document.getElementById("phoneNumberInput").value = "";
+    document.getElementById("passwordInput").value = "";
+    document.getElementById("registerForm").style.display = "none";
+  }
+
+  function loginUser(phoneNumber, password) {
+    if (registeredUsers[phoneNumber] === password) {
+      alert("Login successful! Redirecting to the next page.");
+      window.location.href = "welcome.html"; // Change "welcome.html" to the desired next page URL
+    } else {
+      alert("Incorrect phone number or password. Please try again.");
+    }
+  }
+
+  document.getElementById("registerBtn").addEventListener("click", function() {
+    document.getElementById("registerForm").style.display = "block";
+    document.getElementById("loginForm").style.display = "none";
+  });
+
+  document.getElementById("loginBtn").addEventListener("click", function() {
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("registerForm").style.display = "none";
+  });
+
+  document.getElementById("submitRegistration").addEventListener("click", function() {
+    var phoneNumber = document.getElementById("phoneNumberInput").value;
+    var password = document.getElementById("passwordInput").value;
+    if (phoneNumber && password) {
+      registerUser(phoneNumber, password);
+    } else {
+      alert("Please enter your phone number and create a password.");
+    }
+  });
+
+  document.getElementById("submitLogin").addEventListener("click", function() {
+    var phoneNumber = document.getElementById("loginPhoneNumberInput").value;
+    var password = document.getElementById("loginPasswordInput").value;
+    if (phoneNumber && password) {
+      loginUser(phoneNumber, password);
+    } else {
+      alert("Please enter your phone number and password.");
+    }
+  });
+</script>
+
+</body>
+</html>
