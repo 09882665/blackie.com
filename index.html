@@ -1,114 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login and Register</title>
-  <style>
-    
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;background-color: green;
-      border-style: outset;cursor:pointer;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Gadgets Store</title>
+    <style>
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
 
-    }
-    .container {
-      width: 80%;
-      margin: 0 auto;
-      text-align: center;
-      padding-top: 50px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin: 10px;
-      cursor:pointer;background-color: blue;
-      border-radius: 50px;
+        header {
+            background-color: #0D97F5;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
 
-    }
-    input[type="text"],
-    input[type="password"] {
-      padding: 8px;
-      font-size: 16px;
-      margin: 5px;
-    }
-    h1{text-align: center;}
-    logout
-  </style>
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #0D97F5;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Product card styles */
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px;
+            overflow: hidden;
+            width: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .product-card-content {
+            padding: 20px;
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .product-card p {
+            margin: 0;
+            color: #666;
+        }
+
+        .product-card button {
+            background-color: #0D97F5;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .product-card button:hover {
+            background-color: #0864ab;
+        }
+    </style>
 </head>
 <body>
-<h1>WELCOME TO NTHUNGUNI SECONDARY SCHOOL<h1>
-<div class="container"><br>
-  <h1> </h1>
-    <button id="registerBtn">Register</button>
-  <button id="loginBtn">Login</button>
-</div>
+    <header>
+        <h1>Electronic Gadgets Store</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div id="registerForm" style="display: none;">
-  <h2>Registration</h2>
-  <input type="text" id="phoneNumberInput" placeholder="Enter your phone number">
-  <input type="password" id="passwordInput" placeholder="Create a password">
-  <button id="submitRegistration">Register</button>
-</div>
+    <main>
+        <div class="product-card">
+            <img src="bag.jpg" alt="Smartphone">
+            <div class="product-card-content">
+                <h3>Smartphone</h3>
+                <p>$499</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="laptop.jpg" alt="Laptop">
+            <div class="product-card-content">
+                <h3>Laptop</h3>
+                <p>$999</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="smartwatch.jpg" alt="Smartwatch">
+            <div class="product-card-content">
+                <h3>Smartwatch</h3>
+                <p>$199</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+        <!-- Add more product cards here -->
+    </main>
 
-<div id="loginForm" style="display: none;">
-  <h2>Login</h2>
-  <input type="text" id="loginPhoneNumberInput" placeholder="Enter your phone number">
-  <input type="password" id="loginPasswordInput" placeholder="Enter your password">
-  <button id="submitLogin">Login</button>
-</div>
-
-<script>
-  var registeredUsers = {};
-
-  function registerUser(phoneNumber, password) {
-    registeredUsers[phoneNumber] = password;
-    alert("Registration successful! You can now login.");
-    document.getElementById("phoneNumberInput").value = "";
-    document.getElementById("passwordInput").value = "";
-    document.getElementById("registerForm").style.display = "none";
-  }
-
-  function loginUser(phoneNumber, password) {
-    if (registeredUsers[phoneNumber] === password) {
-      alert("Login successful! Redirecting to the next page.");
-      window.location.href = "welcome.html"; // Change "welcome.html" to the desired next page URL
-    } else {
-      alert("Incorrect phone number or password. Please try again.");
-    }
-  }
-
-  document.getElementById("registerBtn").addEventListener("click", function() {
-    document.getElementById("registerForm").style.display = "block";
-    document.getElementById("loginForm").style.display = "none";
-  });
-
-  document.getElementById("loginBtn").addEventListener("click", function() {
-    document.getElementById("loginForm").style.display = "block";
-    document.getElementById("registerForm").style.display = "none";
-  });
-
-  document.getElementById("submitRegistration").addEventListener("click", function() {
-    var phoneNumber = document.getElementById("phoneNumberInput").value;
-    var password = document.getElementById("passwordInput").value;
-    if (phoneNumber && password) {
-      registerUser(phoneNumber, password);
-    } else {
-      alert("Please enter your phone number and create a password.");
-    }
-  });
-
-  document.getElementById("submitLogin").addEventListener("click", function() {
-    var phoneNumber = document.getElementById("loginPhoneNumberInput").value;
-    var password = document.getElementById("loginPasswordInput").value;
-    if (phoneNumber && password) {
-      loginUser(phoneNumber, password);
-    } else {
-      alert("Please enter your phone number and password.");
-    }
-  });
-</script>
-
+    <footer>
+        <p>&copy; 2024 Electronic Gadgets Store</p>
+    </footer>
 </body>
 </html>
