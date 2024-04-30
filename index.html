@@ -43,9 +43,6 @@
 
         main {
             padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
         footer {
@@ -55,14 +52,18 @@
             padding: 10px 0;
         }
 
-        /* Product card styles */
+        /* Product list styles */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+
         .product-card {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 20px;
             overflow: hidden;
-            width: 300px;
             transition: transform 0.3s ease;
         }
 
@@ -105,6 +106,43 @@
         .product-card button:hover {
             background-color: #0864ab;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -120,35 +158,70 @@
     </header>
 
     <main>
-        <div class="product-card">
-            <img src="bag.jpg" alt="Smartphone">
-            <div class="product-card-content">
-                <h3>Smartphone</h3>
-                <p>$499</p>
-                <button>Add to Cart</button>
+        <div class="product-list">
+            <div class="product-card">
+                <img src="smartphone.jpg" alt="Smartphone">
+                <div class="product-card-content">
+                    <h3>Smartphone</h3>
+                    <p>$499</p>
+                    <button onclick="openModal('Smartphone', '$499', 'This is a smartphone description.')">View Details</button>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="laptop.jpg" alt="Laptop">
-            <div class="product-card-content">
-                <h3>Laptop</h3>
-                <p>$999</p>
-                <button>Add to Cart</button>
+            <div class="product-card">
+                <img src="laptop.jpg" alt="Laptop">
+                <div class="product-card-content">
+                    <h3>Laptop</h3>
+                    <p>$999</p>
+                    <button onclick="openModal('Laptop', '$999', 'This is a laptop description.')">View Details</button>
+                </div>
             </div>
-        </div>
-        <div class="product-card">
-            <img src="smartwatch.jpg" alt="Smartwatch">
-            <div class="product-card-content">
-                <h3>Smartwatch</h3>
-                <p>$199</p>
-                <button>Add to Cart</button>
+            <div class="product-card">
+                <img src="smartwatch.jpg" alt="Smartwatch">
+                <div class="product-card-content">
+                    <h3>Smartwatch</h3>
+                    <p>$199</p>
+                    <button onclick="openModal('Smartwatch', '$199', 'This is a smartwatch description.')">View Details</button>
+                </div>
             </div>
+            <!-- Add more product cards here -->
         </div>
-        <!-- Add more product cards here -->
     </main>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalPrice"></p>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2024 Electronic Gadgets Store</p>
     </footer>
+
+    <script>
+        // Open modal function
+        function openModal(title, price, description) {
+            document.getElementById('myModal').style.display = "block";
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalPrice').innerHTML = price;
+            document.getElementById('modalDescription').innerHTML = description;
+        }
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Close modal when clicking outside the modal content
+        window.onclick = function(event) {
+            var modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
